@@ -141,7 +141,7 @@ namespace elme
                     if (j != 0)
                         x /= Math.Pow(10, j);
                 }
-                
+
             }
             catch (Exception ex)
             {

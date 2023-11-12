@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using Microsoft.Maui.Graphics.Text;
 using System.Collections.ObjectModel;
+
+
 namespace elme.ViewModel;
 
 public class ViewModel : INotifyPropertyChanged
@@ -9,7 +11,7 @@ public class ViewModel : INotifyPropertyChanged
     private string _inputText;
     public ICommand AppendCommand { get; }
     public ICommand CalculateCommand { get; }
-    public ObservableCollection<string> CalculationHistory { get; } 
+    public ObservableCollection<string> CalculationHistory { get; }
     public ICommand ClearCommand { get; }
     public ICommand DeleteCommand { get; }
     public bool check;
@@ -63,9 +65,9 @@ public class ViewModel : INotifyPropertyChanged
                     check = true;
                 }
             }
-        }   
+        }
     }
-    
+
     private void Clear()
     {
         InputText = "";
@@ -78,37 +80,40 @@ public class ViewModel : INotifyPropertyChanged
 
     private void Calculate(string value)
     {
-        check = false;
-        string temp;
-        temp = InputText;
-        if (double.TryParse(InputText, out _))
+        if (InputText != "" && InputText != "Ошибка")
         {
-            c1 = true;
-            InputText = "Ошибка";
-            AddToHistory(temp + '=' + InputText);
-        }
-        else
-        {
-            try
+            check = false;
+            string temp;
+            temp = InputText;
+            if (double.TryParse(InputText, out _))
             {
-                var calculator = new Calculator();
-                calculator.s = InputText;
-                temp = calculator.ProcE().ToString();
-                c1 = calculator.c;
-                if (calculator.c)
-                {
-                    InputText = "Ошибка";
-                    AddToHistory(calculator.s + '=' + InputText);
-                }
-                else
-                {
-                    InputText = temp;
-                    AddToHistory(calculator.s + '=' + temp);
-                }
+                c1 = true;
+                InputText = "Ошибка";
+                AddToHistory("     " + temp + '=' + InputText);
             }
-            catch (Exception ex)
+            else
             {
-                InputText = "Error: " + ex.Message;
+                try
+                {
+                    var calculator = new Calculator();
+                    calculator.s = InputText;
+                    temp = calculator.ProcE().ToString();
+                    c1 = calculator.c;
+                    if (calculator.c)
+                    {
+                        InputText = "Ошибка";
+                        AddToHistory("   " + calculator.s + '=' + InputText);
+                    }
+                    else
+                    {
+                        InputText = temp;
+                        AddToHistory("     " + calculator.s + '=' + temp);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    InputText = "Error: " + ex.Message;
+                }
             }
         }
     }

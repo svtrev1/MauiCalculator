@@ -4,9 +4,7 @@
              xmlns:viewmodel='clr-namespace:elme.ViewModel'
              x:DataType="{x:Type viewmodel:ViewModel}"
              x:Class="elme.MainPage"
-             Title="MainPage"
-             >
-
+             Title="MainPage">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -22,36 +20,55 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <CollectionView Grid.Row="0" Grid.ColumnSpan="4" ItemsSource="{Binding CalculationHistory}">
+        </Grid.ColumnDefinitions> 
+        <CollectionView BackgroundColor="#242322" Grid.Row="0" Grid.ColumnSpan="4" ItemsSource="{Binding CalculationHistory}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding}" />
+                    <Label FontSize="20" Text="{Binding}" />
                 </DataTemplate>
-             </CollectionView.ItemTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
-        <Label Grid.Row="1" Grid.ColumnSpan="4" x:Name="MainLabel" x:DataType="viewmodel:ViewModel" Text="{Binding InputText}"/>
-        <Button Grid.Column="0" Grid.Row="2" Text="=" Command="{Binding CalculateCommand}"/>
-        <Button Grid.Column="1" Grid.Row="2" Text="(" Command="{Binding AppendCommand}" CommandParameter="("/>
-        <Button Grid.Column="2" Grid.Row="2" Text=")" Command="{Binding AppendCommand}" CommandParameter=")"/>
-        <Button Grid.Column="3" Grid.Row="2" Text="/" Command="{Binding AppendCommand}" CommandParameter="/"/>
-        <Button Grid.Column="0" Grid.Row="3" Text="7" Command="{Binding AppendCommand}" CommandParameter="7"/>
-        <Button Grid.Column="1" Grid.Row="3" Text="8" Command="{Binding AppendCommand}" CommandParameter="8"/>
-        <Button Grid.Column="2" Grid.Row="3" Text="9" Command="{Binding AppendCommand}" CommandParameter="9"/>
-        <Button Grid.Column="3" Grid.Row="3" Text="*" Command="{Binding AppendCommand}" CommandParameter="*"/>
-        <Button Grid.Column="0" Grid.Row="4" Text="4" Command="{Binding AppendCommand}" CommandParameter="4"/>
-        <Button Grid.Column="1" Grid.Row="4" Text="5" Command="{Binding AppendCommand}" CommandParameter="5"/>
-        <Button Grid.Column="2" Grid.Row="4" Text="6" Command="{Binding AppendCommand}" CommandParameter="6"/>
-        <Button Grid.Column="3" Grid.Row="4" Text="-" Command="{Binding AppendCommand}" CommandParameter="-"/>
-        <Button Grid.Column="0" Grid.Row="5" Text="1" Command="{Binding AppendCommand}" CommandParameter="1"/>
-        <Button Grid.Column="1" Grid.Row="5" Text="2" Command="{Binding AppendCommand}" CommandParameter="2"/>
-        <Button Grid.Column="2" Grid.Row="5" Text="3" Command="{Binding AppendCommand}" CommandParameter="3"/>
-        <Button Grid.Column="3" Grid.Row="5" Text="+" Command="{Binding AppendCommand}" CommandParameter="+"/>
-        <Button Grid.Column="0" Grid.Row="6" Text="C" Command="{Binding ClearCommand}"/>
-        <Button Grid.Column="1" Grid.Row="6" Text="&lt;-" Command="{Binding DeleteCommand}"/>
-        <Button Grid.Column="2" Grid.Row="6" Text="0" Command="{Binding AppendCommand}" CommandParameter="0"/>
-        <Button Grid.Column="3" Grid.Row="6" Text="," Command="{Binding AppendCommand}" CommandParameter=","/>
+        <Label x:Name="MainLabel" Margin="25" FontSize="80" Grid.Row="1" Grid.ColumnSpan="4" x:Name="MainLabel" x:DataType="viewmodel:ViewModel" Text="{Binding InputText}"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="OrangeRed" FontSize="50" TextColor="White"
+                Grid.Column="0" Grid.Row="2" Text="=" Command="{Binding CalculateCommand}"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="OrangeRed" FontSize="50" TextColor="White"
+            Grid.Column="1" Grid.Row="2" Text="C" Command="{Binding ClearCommand}"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="OrangeRed" FontSize="50" TextColor="White"
+            Grid.Column="2" Grid.Row="2" Text="&lt;-" Command="{Binding DeleteCommand}"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DarkOrange" FontSize="50" TextColor="White"
+            Grid.Column="3" Grid.Row="2" Text="/" Command="{Binding AppendCommand}" CommandParameter="/"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="0" Grid.Row="3" Text="7" Command="{Binding AppendCommand}" CommandParameter="7"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="1" Grid.Row="3" Text="8" Command="{Binding AppendCommand}" CommandParameter="8"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="2" Grid.Row="3" Text="9" Command="{Binding AppendCommand}" CommandParameter="9"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DarkOrange" FontSize="50" TextColor="White"
+            Grid.Column="3" Grid.Row="3" Text="*" Command="{Binding AppendCommand}" CommandParameter="*"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="0" Grid.Row="4" Text="4" Command="{Binding AppendCommand}" CommandParameter="4"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="1" Grid.Row="4" Text="5" Command="{Binding AppendCommand}" CommandParameter="5"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="2" Grid.Row="4" Text="6" Command="{Binding AppendCommand}" CommandParameter="6"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DarkOrange" FontSize="50" TextColor="White"
+            Grid.Column="3" Grid.Row="4" Text="-" Command="{Binding AppendCommand}" CommandParameter="-"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="0" Grid.Row="5" Text="1" Command="{Binding AppendCommand}" CommandParameter="1"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="1" Grid.Row="5" Text="2" Command="{Binding AppendCommand}" CommandParameter="2"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="2" Grid.Row="5" Text="3" Command="{Binding AppendCommand}" CommandParameter="3"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DarkOrange" FontSize="50" TextColor="White"
+            Grid.Column="3" Grid.Row="5" Text="+" Command="{Binding AppendCommand}" CommandParameter="+"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="0" Grid.Row="6" Text="(" Command="{Binding AppendCommand}" CommandParameter="("/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="1" Grid.Row="6" Text=")" Command="{Binding AppendCommand}" CommandParameter=")"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DimGrey" FontSize="50" TextColor="White"
+            Grid.Column="2" Grid.Row="6" Text="0" Command="{Binding AppendCommand}" CommandParameter="0"/>
+        <Button WidthRequest="120" HeightRequest="120" CornerRadius="60" BackgroundColor="DarkOrange" FontSize="50" TextColor="White"
+            Grid.Column="3" Grid.Row="6" Text="," Command="{Binding AppendCommand}" CommandParameter=","/>
     </Grid>
-
 </ContentPage>
 
