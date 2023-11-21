@@ -9,6 +9,7 @@ namespace elme.ViewModel;
 public class ViewModel : INotifyPropertyChanged
 {
     private string _inputText;
+    private double _fontSize;
     public ICommand AppendCommand { get; }
     public ICommand CalculateCommand { get; }
     public ObservableCollection<string> CalculationHistory { get; }
@@ -16,6 +17,8 @@ public class ViewModel : INotifyPropertyChanged
     public ICommand DeleteCommand { get; }
     public bool check;
     public bool c1;
+    private int sizeT;
+    private int sizeF;
 
     public ViewModel()
     {
@@ -27,6 +30,29 @@ public class ViewModel : INotifyPropertyChanged
         CalculateCommand = new Command<string>(Calculate);
         ClearCommand = new Command(Clear);
         DeleteCommand = new Command(Delete);
+        FontSize = 80;
+        sizeT = 13;
+        sizeF = 60;
+    }
+
+    private void UpdateFontSize()
+    {
+        if (InputText.Length > sizeT)
+        {
+            FontSize = sizeF;
+            sizeT += 4;
+            sizeF = 1040 / (sizeT+4) - 1;
+        }
+    }
+
+    public double FontSize
+    {
+        get => _fontSize;
+        set
+        {
+            _fontSize = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FontSize)));
+        }
     }
 
     public string InputText
@@ -36,11 +62,13 @@ public class ViewModel : INotifyPropertyChanged
         {
             _inputText = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InputText)));
+            UpdateFontSize();
         }
     }
 
     private void Append(string value)
     {
+        
         if (c1)
         {
             InputText = value;
@@ -50,6 +78,7 @@ public class ViewModel : INotifyPropertyChanged
         else
         {
             if (check)
+                
                 InputText += value;
             else
             {
@@ -70,6 +99,9 @@ public class ViewModel : INotifyPropertyChanged
 
     private void Clear()
     {
+        FontSize = 80;
+        sizeT = 13;
+        sizeF = 60;
         InputText = "";
     }
 
@@ -80,6 +112,9 @@ public class ViewModel : INotifyPropertyChanged
 
     private void Calculate(string value)
     {
+        FontSize = 80;
+        sizeT = 13;
+        sizeF = 60;
         if (InputText != "" && InputText != "Ошибка")
         {
             check = false;
@@ -97,12 +132,12 @@ public class ViewModel : INotifyPropertyChanged
                 {
                     var calculator = new Calculator();
                     calculator.s = InputText;
-                    temp = calculator.ProcE().ToString();
+                    temp = calculator.Cal().ToString();
                     c1 = calculator.c;
                     if (calculator.c)
                     {
                         InputText = "Ошибка";
-                        AddToHistory("   " + calculator.s + '=' + InputText);
+                        AddToHistory("     " + calculator.s + '=' + InputText);
                     }
                     else
                     {

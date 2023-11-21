@@ -7,13 +7,73 @@ namespace elme
         public int i = 0;
         public bool c = false;
 
-        public double ProcE() // результат
+        public double Cal()
+        {
+            i = 0;
+            s = s.Trim();  // удаляем пробелы в начале и в конце строки
+            
+
+            // начинаем парсить выражение с проверкой на корректную структуру
+            try
+            {
+                int openBrackets = 0;
+                int closeBrackets = 0;
+
+                foreach (char ch in s)
+                {
+                    if (ch == '(')
+                    {
+                        openBrackets++;
+                    }
+                    else if (ch == ')')
+                    {
+                        closeBrackets++;
+                    }
+                    if (closeBrackets > openBrackets)
+                    {
+                        throw new Exception("Unbalanced brackets: Closing bracket without corresponding opening bracket");
+                    }
+                }
+
+                // проверяем, чтобы количество открывающих и закрывающих скобок совпадало
+                if (openBrackets != closeBrackets)
+                {
+                    throw new Exception("Unbalanced brackets: Number of opening and closing brackets is not equal");
+                }
+
+                double result = ProcE();
+
+                // проверяем, были ли ошибки во время парсинга
+                if (c)
+                {
+                    throw new Exception("An error occurred during parsing");
+                }
+
+                return Math.Round(result, 10);
+            }
+            catch (Exception ex)
+            {
+                c = true;
+                Console.WriteLine("Calculation error: " + ex.Message);
+                return double.NaN;  // возвращаем NaN в случае ошибки
+            }
+           
+        }
+
+        public double ProcE()
         {
             s += '\0';
             double x = 0;
             try
             {
+                if (s[i] == ')')
+                {
+                    throw new Exception("Unbalanced brackets: Unexpected closing bracket");
+                }
+
                 x = ProcT();
+                if (s[i] == ',')
+                    throw new Exception("Using , without number");
                 while (s[i] == '+' || s[i] == '-')
                 {
                     char p = s[i];
@@ -28,14 +88,19 @@ namespace elme
                     }
                 }
 
+                if (i < s.Length && s[i] == '(')
+                {
+                    throw new Exception("Unbalanced brackets: Unexpected opening bracket");
+                }
             }
             catch (Exception ex)
             {
                 c = true;
                 Console.WriteLine("Error in ProcE: " + ex.Message);
             }
-            return x;
+            return Math.Round(x, 10);
         }
+
 
         public double ProcT()
         {
