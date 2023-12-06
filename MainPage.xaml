@@ -24,7 +24,7 @@
         <CollectionView BackgroundColor="#242322" Grid.Row="0" Grid.ColumnSpan="4" ItemsSource="{Binding CalculationHistory}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label FontSize="20" Text="{Binding}" />
+                    <Label FontSize="20" Text="{Binding}" LineBreakMode="NoWrap"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
