@@ -14,7 +14,10 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        BindingContext = new ViewModel.ViewModel();
+        //IMemory memory = new FileMemory();
+        IMemory memory = new DBMemory();
+        //IMemory memory = new RamMemory();
+        BindingContext = new ViewModel.ViewModel(memory);
 
     }
 
