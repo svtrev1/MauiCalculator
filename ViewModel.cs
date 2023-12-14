@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using MySql.Data.MySqlClient;
 using System;
 using System.IO;
+using Parser;
 
 
 namespace elme.ViewModel;
@@ -196,18 +197,21 @@ public class ViewModel : INotifyPropertyChanged
         FontSize = 80;
         sizeT = 13;
         sizeF = 60;
-        string[] arr = new string[10];
+        string[] arr = new string [5];
         arr = memory.Load();
         try
         {
             if (arr[0] != null)
-            {
                 AddToHistory(arr[0]);
+            if (arr[1] != null)
                 AddToHistory(arr[1]);
+            if (arr[2] != null)
                 AddToHistory(arr[2]);
+            if (arr[3] != null)
                 AddToHistory(arr[3]);
+            if (arr[4] != null)
                 AddToHistory(arr[4]);
-            }
+            
         }
         catch (Exception)
         { }
